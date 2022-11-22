@@ -14,7 +14,9 @@
           :style="{ 'font-size': kFOne + 'px'}"
           
         >
-          <dv-decoration-9 :style="{'width': kHOne - 66 + 'px','height': kHOne - 66 + 'px','margin': '0px auto'}">{{item.name}}</dv-decoration-9>
+          <dv-decoration-9 :style="{'width': kHOne - 66 + 'px','height': kHOne - 66 + 'px','margin': '0px auto'}">
+            <span :style="{color: item.color }">{{item.name}}</span>
+          </dv-decoration-9>
         </div>
         <div
           :style="{ height: kHOne + 'px','font-size': Math.round(kFOne * 1.3) + 'px','margin-top': Math.round(kFOne/2) + 'px', 'color': item.color}"
@@ -127,11 +129,11 @@ export default {
     },
     getData() {
       this.row1 = [];
-      this.row1.push({ name: '2800亩', value: "园区面积", color: '#33cea0'})
-      this.row1.push({ name: '2182亩', value: "种植面积", color: '#33cea0'})
-      this.row1.push({ name: '6种', value: "种植品种", color: '#33cea0' })
+      this.row1.push({ name: '96%', value: "在线", color: '#11d1aa'})
+      this.row1.push({ name: '4%', value: "离线", color: '#bebebe'})
+      this.row1.push({ name: '0%', value: "异常", color: 'red' })
     },
-    // 定时器
+    // 定时器 
     getDataTimer() {
       this.koiTimer = setInterval(() => {
         this.getData();

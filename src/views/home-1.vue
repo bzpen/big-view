@@ -8,7 +8,9 @@
           <!-- 第一部分-头部-start -->
             <div class="header">
               <!-- 首页 -->
-              <a class="homePage font-bold colorDeepskyblue" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}" href="http://localhost:8017/#/" target="_self">首页</a>
+              <a class="homePage font-bold colorDeepskyblue" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}" href="https://gitee.com/BigCatHome/koi-screen" target="_self">
+                丘陵山地无人果园管理平台
+              </a>
               <!-- 时间 -->
               <div class="localTime colorPink" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}">{{ dateYear }} {{ dateWeek }} {{ dateDay }}</div>
               <!-- 装饰10 -->
@@ -16,7 +18,7 @@
               <!-- 装饰8 -->
               <dv-decoration-8 class="dv-dec-8-left" :color="decorationColor"/>
               <!-- 标题 -->
-              <span class="title font-bold colorText" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}">EMS可视化平台</span>
+              <span class="title font-bold colorText" :style="{'font-size': Math.round(this.screenWidth/100) + 'px'}">丘陵山地无人果园管理平台</span>
               <!-- 装饰8 -->
               <dv-decoration-8 class="dv-dec-8-right" :reverse="true" :color="decorationColor" />
               <!-- 装饰10 -->
@@ -24,71 +26,43 @@
             </div>
           <!-- 第一部分-头部-end -->
 
-        <!-- 网格布局 grid -->
-        <!-- <div class="wrapper">
-          <div class="one item">One</div>
-          <div class="two item">Two</div>
-          <div class="three item">Three</div>
-          <div class="four item">Four</div>
-          <div class="five item">Five</div>
-          <div class="six item">Six</div>
-        </div> -->
-
-        <!-- 弹性布局 flex -->
-        <!-- <div class="container">
-          <div class="one item">One</div>
-          <div class="two item">Two</div>
-          <div class="three item">Three</div>
-          <div class="four item">Four</div>
-          <div class="five item">Five</div>
-          <div class="six item">Six</div>
-        </div> -->
-
-        <!-- Element-UI Layout布局,主要是用来配置边框自适应 -->
+        <!-- Element-UI Layout布局 -->
         <div class="layoutHome">
           <el-row>
-            <el-col :span="6">
+            <el-col :span="9">
               <div :style="{ height: kHOne + 'px'}">
                 <dv-border-box-12 style="padding:12px">
-                  <leftchart1></leftchart1>
+                  <weather></weather>
                 </dv-border-box-12>
               </div>
-
               <div :style="{ height: kHTwo + 'px'}">
-                <!-- style="padding:12px" -->
-                <dv-border-box-12 style="padding:12px">
-                  <leftchart-2></leftchart-2>
-                </dv-border-box-12>
-              </div>
-            </el-col>
-
-            <el-col :span="12">
-              <div :style="{ height: kHThree + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <center></center>
-                </dv-border-box-12>
-              </div>
-              <div :style="{ height: kHFour + 'px'}">
                 <dv-border-box-12 style="padding:12px">
                   <centerchart1></centerchart1>
+                </dv-border-box-12>
+              </div>
+              <div class="title">物联设备详情</div>
+              <div :style="{ height: kHThree + 'px'}">
+                <!-- style="padding:12px" -->
+                <dv-border-box-12 style="padding:12px">
+                  <table3 :table-h="kHThree"></table3>
                 </dv-border-box-12>
               </div>
             </el-col>
 
             <el-col :span="6">
               <div :style="{ height: kHFive + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <rightchart1></rightchart1>
-                </dv-border-box-12>
               </div>
+            </el-col>
+
+            <el-col :span="9">
               <div :style="{ height: kHSix + 'px'}">
-                <dv-border-box-12 style="padding:12px">
-                  <rightchart2></rightchart2>
-                </dv-border-box-12>
+              </div>
+              <div class="title">
+                  物联网设备统计
               </div>
               <div :style="{ height: kHSeven + 'px'}">
                 <dv-border-box-12 style="padding:12px">
-                  <rightchart3></rightchart3>
+                  <tableDetails :table-h="kHSeven"></tableDetails>
                 </dv-border-box-12>
               </div>
             </el-col>
@@ -101,21 +75,35 @@
 </template>
 
 <script>
-import { formatTime } from '../utils/index.js'
-import leftchart1 from "../components/ems/left/chart1.vue";
-import leftchart2 from "../components/ems/left/chart2.vue";
-import center from "../components/ems/center/center.vue";
-import centerchart1 from "../components/ems/center/chart1.vue";
-import rightchart1 from "../components/ems/right/chart1.vue";
-import rightchart2 from "../components/ems/right/chart2.vue";
-import rightchart3 from "../components/ems/right/chart3.vue";
+import { formatTime } from '../utils/index.js';
+import weather from "../components/koi/left/weather.vue"
+import leftchart1 from "../components/koi/left/chart1.vue";
+import leftchart2 from "../components/koi/left/chart2data.vue";
+import leftchart3 from "../components/koi/left/chart3.vue";
+import table3 from "../components/home/table3.vue"
+import tableDetails from "../components/home/table-details.vue"
+import centerchart1 from "../components/koi/center/chart1.vue";
+import centerchart2 from "../components/koi/center/chart2.vue";
+import centerchart3 from "../components/koi/center/chart3.vue";
+import lookVideo from "../components/koi/right/look-video.vue";
+import dataTable from "../components/koi/right/data-table.vue";
+import rightchart1 from "../components/koi/right/chart1.vue";
+import rightchart2 from "../components/koi/right/chart2.vue";
+import rightchart3 from "../components/koi/right/chart3.vue";
 export default {
   name: 'index',
   components: {
-    center,
+    weather,
     leftchart1,
+    table3,
+    tableDetails,
     leftchart2,
+    leftchart3,
     centerchart1,
+    centerchart2,
+    centerchart3,
+    lookVideo,
+    dataTable,
     rightchart1,
     rightchart2,
     rightchart3
@@ -125,8 +113,12 @@ export default {
     loading: true,
     // 装饰8颜色
     decorationColor: ['#568aea', '#000000'],
+    // 时间
     timer: null,
+    // 适应浏览器
     koiTime: null,
+    // 定时跳转页面
+    koiTimer: null,
     dateDay: null,
     dateYear: null,
     dateWeek: null,
@@ -143,7 +135,10 @@ export default {
     kHFive: 450,
     kHSix: 300,
     kHSeven: 400,
-    kHEight: 400
+    kHEight: 400,
+    hoverColor:[
+      [],[],[],[]
+    ]
   }
   },
   created () {
@@ -162,7 +157,11 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.timer)
+    this.timer = null;
     clearInterval(this.koiTime);
+    this.koiTime = null;
+    clearInterval(this.koiTimer);
+    this.koiTimer = null;
     // 页面大小改变时触发
     window.removeEventListener('resize',this.getScreenHeight, false);
     // 页面大小改变时触发
@@ -217,24 +216,40 @@ export default {
     getScreenHeight() {
         this.screenHeight = window.innerHeight || document.documentElement.innerHeight || document.body.clientHeight;
         // 四舍五入取整数
-        this.kHOne = Math.round(this.screenHeight * 0.47);
-        this.kHTwo = Math.round(this.screenHeight * 0.47);
-        this.kHThree = Math.round(this.screenHeight * 0.4);
-        this.kHFour = Math.round(this.screenHeight * 0.54);
-        this.kHFive = Math.round(this.screenHeight * 0.31);
-        this.kHSix = Math.round(this.screenHeight * 0.31);
-        this.kHSeven = Math.round(this.screenHeight * 0.32);
+        this.kHOne = Math.round(this.screenHeight * 0.18);
+        this.kHTwo = Math.round(this.screenHeight * 0.23);
+        this.kHThree = Math.round(this.screenHeight * 0.50);
+        // this.kHFour = Math.round(this.screenHeight * 0.20);
+        this.kHFive = Math.round(this.screenHeight * 0.82);
+        this.kHSix = Math.round(this.screenHeight * 0.3);
+        this.kHSeven = Math.round(this.screenHeight * 0.6);
         //console.log(this.screenHeight +"-"+ Math.round(this.percentHThirty) +"-"+ Math.round(this.percentHForty));
     },
     // 字体大小根据宽度自适应
     getScreenWidth(){
       this.screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       //console.log("hh-"+this.screenWidth+"-"+this.screenHeight);
+    },
+    //鼠标Hover事件
+    hoverOver(index){
+      this.hoverColor[index] = ["red","red"]
+      console.log(this.hoverColor[index]);
+    },
+    hoverLeave(index){
+      console.log("-------------");
+      this.hoverColor[index] = []
     }
-
   }
 }
 </script>
 
 <style lang="less" scoped>
+.title{
+  text-align: left;
+  padding-left: 10px;
+  font-size: 26px;
+}
+.el-table::before{
+  border-color: aqua !important;
+}
 </style>
