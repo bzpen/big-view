@@ -44,25 +44,31 @@
               <div :style="{ height: kHThree + 'px'}">
                 <!-- style="padding:12px" -->
                 <dv-border-box-12 style="padding:12px">
-                  <table3 :table-h="kHThree"></table3>
+                  <table3 :table-h="kHThree" @changeDetails="changeDetails"></table3>
                 </dv-border-box-12>
               </div>
             </el-col>
 
-            <el-col :span="6">
+            <!-- <el-col :span="4">
               <div :style="{ height: kHFive + 'px'}">
               </div>
-            </el-col>
+            </el-col> -->
 
-            <el-col :span="9">
+            <el-col :span="15">
               <div :style="{ height: kHSix + 'px'}">
               </div>
               <div class="title">
-                  物联网设备统计
+                {{ detailsTitle[detailsStatus] }}
               </div>
               <div :style="{ height: kHSeven + 'px'}">
-                <dv-border-box-12 style="padding:12px">
+                <dv-border-box-12 v-if="(detailsStatus === 0)" style="padding:12px">
                   <tableDetails :table-h="kHSeven"></tableDetails>
+                </dv-border-box-12>
+                <dv-border-box-12 style="padding:12px" v-if="(detailsStatus === 1)">
+                  <tableDetails1 :table-h="kHSeven"></tableDetails1>
+                </dv-border-box-12>
+                <dv-border-box-12 style="padding:12px" v-if="(detailsStatus === 2)">
+                  <tableDetails2 :table-h="kHSeven"></tableDetails2>
                 </dv-border-box-12>
               </div>
             </el-col>
@@ -77,36 +83,20 @@
 <script>
 import { formatTime } from '../utils/index.js';
 import weather from "../components/koi/left/weather.vue"
-import leftchart1 from "../components/koi/left/chart1.vue";
-import leftchart2 from "../components/koi/left/chart2data.vue";
-import leftchart3 from "../components/koi/left/chart3.vue";
 import table3 from "../components/home/table3.vue"
 import tableDetails from "../components/home/table-details.vue"
+import tableDetails1 from "../components/home/table-details1.vue"
+import tableDetails2 from "../components/home/table-details2.vue"
 import centerchart1 from "../components/koi/center/chart1.vue";
-import centerchart2 from "../components/koi/center/chart2.vue";
-import centerchart3 from "../components/koi/center/chart3.vue";
-import lookVideo from "../components/koi/right/look-video.vue";
-import dataTable from "../components/koi/right/data-table.vue";
-import rightchart1 from "../components/koi/right/chart1.vue";
-import rightchart2 from "../components/koi/right/chart2.vue";
-import rightchart3 from "../components/koi/right/chart3.vue";
 export default {
   name: 'index',
   components: {
     weather,
-    leftchart1,
     table3,
     tableDetails,
-    leftchart2,
-    leftchart3,
+    tableDetails1,
+    tableDetails2,
     centerchart1,
-    centerchart2,
-    centerchart3,
-    lookVideo,
-    dataTable,
-    rightchart1,
-    rightchart2,
-    rightchart3
   },
   data () {
   return {
@@ -138,11 +128,10 @@ export default {
     kHEight: 400,
     hoverColor:[
       [],[],[],[]
-    ]
+    ],
+    detailsStatus: 0,
+    detailsTitle: [ "虫情系统", "气象站", "土壤监测" ]
   }
-  },
-  created () {
-
   },
   mounted(){
     // 页面大小改变时触发
@@ -221,8 +210,8 @@ export default {
         this.kHThree = Math.round(this.screenHeight * 0.50);
         // this.kHFour = Math.round(this.screenHeight * 0.20);
         this.kHFive = Math.round(this.screenHeight * 0.82);
-        this.kHSix = Math.round(this.screenHeight * 0.3);
-        this.kHSeven = Math.round(this.screenHeight * 0.6);
+        this.kHSix = Math.round(this.screenHeight * 0.1);
+        this.kHSeven = Math.round(this.screenHeight * 0.8);
         //console.log(this.screenHeight +"-"+ Math.round(this.percentHThirty) +"-"+ Math.round(this.percentHForty));
     },
     // 字体大小根据宽度自适应
@@ -238,6 +227,15 @@ export default {
     hoverLeave(index){
       console.log("-------------");
       this.hoverColor[index] = []
+    },
+    changeDetails(val){
+      console.log(val);
+      if( val === "虫情系统")
+        this.detailsStatus = 0
+      if( val === "气象站1")
+        this.detailsStatus = 1
+      if( val === "土壤检测")
+        this.detailsStatus = 2
     }
   }
 }

@@ -45,7 +45,13 @@
     methods:{
       getTdStyle(value){
         console.log(value);
-        return "background-color: black;color: #37ff37;font-size: 22px;text-align: center;border-color:#2d5d95;"
+        return `
+        background-color: black;
+        color: #37ff37;
+        font-size: 22px;
+        text-align: center;
+        border-color:#2d5d95;
+        `
       },
       getHeadStyle(value){
         return "background-color: black;color:darkturquoise;font-size: 18px;text-align: center;border-color:#2d5d95;"
@@ -58,4 +64,6 @@
 .el-table th.el-table__cell{
   background-color: black !important;
 }
+
+
 </style>
